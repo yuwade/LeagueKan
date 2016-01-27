@@ -16,7 +16,8 @@ module.exports = {
     },
     module: {
         loaders: [
-            //{ test: /\.css$/, loader: "style!css" },
+            { test: /\.css$/, loader: "style!css" },
+			{ test: /\.scss$/, loader: "style!css!sass" },
 			{
 				test:/\.jsx?$/ ,loaders:['react-hot'] ,exclude :/node_modules/
 			},
@@ -27,10 +28,19 @@ module.exports = {
 			  query: {
 				presets: ['react', 'es2015']
 			  }
-			}
+			},
+			{ test: /\.woff\d?$/, loader: "file" },
+			{ test: /\.ttf$/, loader: "file" },
+			{ test: /\.eot$/, loader: "file" },
+			{ test: /\.svg$/, loader: "file" },
         ]
     },
 	plugins:[
+			new webpack.ProvidePlugin({
+				$:'jquery',
+				_:'lodash',
+				jQuery:'jquery'
+			}),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin()
 		
